@@ -1,3 +1,4 @@
+import { TransferenciaService } from './../services/transferencia.service';
 import { Component, Input, OnInit } from '@angular/core';
 
 interface ITransferencia {
@@ -12,11 +13,11 @@ interface ITransferencia {
   styleUrls: ['./extrato.component.scss']
 })
 export class ExtratoComponent implements OnInit {
+  transferencias: ITransferencia[] = [];
 
-  @Input() transferencias: ITransferencia[] = [];
+  constructor(private service: TransferenciaService) { }
 
-  constructor() { }
-
-  ngOnInit(): void { }
-
+  ngOnInit(): void {
+    this.transferencias = this.service.ListOftransferencia;
+  }
 }

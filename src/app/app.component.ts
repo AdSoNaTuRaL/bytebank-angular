@@ -1,3 +1,4 @@
+import { TransferenciaService } from './services/transferencia.service';
 import { Component } from '@angular/core';
 
 interface ITransferencia {
@@ -12,11 +13,10 @@ interface ITransferencia {
 })
 export class AppComponent {
   title = 'bytebank';
-  transferencias: ITransferencia[] = [];
+
+  constructor(private service: TransferenciaService) {}
 
   transferir($event: any): void {
-    const transferencia = {...$event, data: new Date()};
-
-    this.transferencias.push(transferencia);
+    this.service.adicionarTransferencia($event);
   }
 }
