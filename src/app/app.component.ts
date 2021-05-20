@@ -12,13 +12,11 @@ interface ITransferencia {
 })
 export class AppComponent {
   title = 'bytebank';
-  transferencia: ITransferencia = {};
+  transferencias: ITransferencia[] = [];
 
   transferir($event: any): void {
-    console.log($event);
+    const transferencia = {...$event, data: new Date()};
 
-    this.transferencia = $event;
+    this.transferencias.push(transferencia);
   }
-
-  exibirModalErro($event: any): void {}
 }
