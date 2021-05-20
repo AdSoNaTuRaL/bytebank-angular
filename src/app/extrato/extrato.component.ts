@@ -1,11 +1,6 @@
+import { Transferencia } from './../../models/transferencia.model';
 import { TransferenciaService } from './../services/transferencia.service';
 import { Component, Input, OnInit } from '@angular/core';
-
-interface ITransferencia {
-  data?: Date;
-  valor?: number;
-  destino?: string;
-}
 
 @Component({
   selector: 'app-extrato',
@@ -13,11 +8,13 @@ interface ITransferencia {
   styleUrls: ['./extrato.component.scss']
 })
 export class ExtratoComponent implements OnInit {
-  transferencias: ITransferencia[] = [];
+  transferencias: Transferencia[] = [];
 
   constructor(private service: TransferenciaService) { }
 
   ngOnInit(): void {
-    this.transferencias = this.service.ListOftransferencia;
+    this.service.all().subscribe((transferencias: Transferencia[]) => {
+      this.transferencias = transferencias;
+    });
   }
 }
