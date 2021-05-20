@@ -7,28 +7,15 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class NovaTransferenciaComponent {
   @Output() aoTransferir = new EventEmitter<any>();
-  @Output() valoresComErro = new EventEmitter<string>();
 
   valor!: number;
   destino!: string;
 
-  private isValido(): boolean {
-    const valido = this.valor > 0;
-
-    if (!valido) {
-      this.valoresComErro.emit('Informe um valor valido!');
-      this.limparCampos();
-    }
-
-    return valido;
-  }
-
   transferir(): void {
-    if (this.isValido()) {
-      const valorEmitir = { valor: this.valor, destino: this.destino };
-      this.aoTransferir.emit(valorEmitir);
-      this.limparCampos();
-    }
+    const valorEmitir = { valor: this.valor, destino: this.destino };
+
+    this.aoTransferir.emit(valorEmitir);
+    this.limparCampos();
   }
 
   limparCampos(): void {
